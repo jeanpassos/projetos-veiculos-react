@@ -1,69 +1,74 @@
-import { useState } from 'react';
-import { Container, Cadastro, Table } from './styles'
-import { IconName } from "react-icons/bs";
-
+import { useState } from "react";
+import { Container, Cadastro, Table } from "./styles";
+import { IconName } from 'react-icons/fa';
 
 function App() {
-  const [Veiculos, setVeiculos] = useState('')
+  const [veiculos, setVeiculos] = useState([]);
 
-  const [placa, setPlaca] = useState('')
-  const [modelo, setModelo] = useState('')
-  const [marca, setMarca] = useState('')
-  const [ano, setAno] = useState('')
+  const [placa, setPlaca] = useState("");
+  const [modelo, setModelo] = useState("");
+  const [marca, setMarca] = useState("");
+  const [ano, setAno] = useState("");
 
-  function cadastrarVeiculos() {
-    const veiculos = [placa, modelo, marca, ano];
-    if (isVeiculoExistente(veiculo.placa)) {
-      alert("Placa já cadastrada")
+  function cadastrarVeiculo() {
+    const veiculo = {placa,modelo,marca,ano};
+    if(isVeiculoExistente(veiculo.placa)){
+      alert('Placa já cadastrada')  
+    } else {
+      veiculos.push(veiculo);
+      const newVeiculos = [...veiculos] //criar novo array com os mesmos valores
+      setVeiculos(newVeiculos)
+      limparFormulario();
     }
-
-    veiculos.push(veiculo);
-    const newVeiculos = [...veiculos]
-    setVeiculos(newVeiculos);
-    limparFormulario();
   };
 
-  function limparFormulario() {
-    setPlaca('');
-    setModelo('');
-    setMarca('');
-    setAno('');
-  }
-
-  function isVeiculoExistente(placa) {
-    let retorno = false;
-    veiculos.foreach(veiculo => {
-      if (veiculo.placa === placa) {
-        retorno = true;
-        continue;
-      }
-    }
-    )
-  }
-
-  function excluirVeiculo(){
-    let index = veiculos.indexof(veiculo);
+  function excluirVeiculo(veiculo) {
+    let index = veiculos.indexOf(veiculo);
     veiculos.splice(index, 1);
     setVeiculos([...veiculos]);
   }
 
+  function limparFormulario() {
+    setPlaca('')
+    setModelo('')
+    setMarca('')
+    setAno('')
+  }
+
+  function isVeiculoExistente(placa) {
+    let retorno = false;
+    veiculos.forEach(veiculo => {
+      if(veiculo.placa === placa) {
+        retorno = true;
+      }
+    })
+    return retorno
+  }
 
   return (
     <Container>
       <Cadastro>
-        <div id="cadastro">
-          <input value={placa} placeholder="Placa" onChange={e => setPlaca(e.target.value)} />
-          <input value={modelo} placeholder="Modelo" onChange={e => setModelo(e.target.value)} />
-          <input value={marca} placeholder="Marca" onChange={e => setMarca(e.target.value)} />
-          <input value={ano} placeholder="Ano" onChange={e => setAno(e.target.value)} />
-          <button>
-            Cadastrar Veiculos
-            <img src="{FcSerialTasks}"/>
-
-          </button>
-        </div>
-
-
+        <input
+          value={placa}
+          placeholder="Placa"
+          onChange={(e) => setPlaca(e.target.value)}
+        />
+        <input
+          value={modelo}
+          placeholder="Modelo"
+          onChange={(e) => setModelo(e.target.value)}
+        />
+        <input
+          value={marca}
+          placeholder="Marca"
+          onChange={(e) => setMarca(e.target.value)}
+        />
+        <input
+          value={ano}
+          placeholder="Ano"
+          onChange={(e) => setAno(e.target.value)}
+        />
+        <button onClick={cadastrarVeiculo}>Cadastrar Veiculo</button>
         <Table>
           <table>
             <thead>
@@ -75,34 +80,27 @@ function App() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>MEV-1234</td>
-                <td>FOX</td>
-                <td>VW</td>
-                <td>2019</td>
-              </tr>
-              <tr>
-                <td>MEV-1234</td>
-                <td>FOX</td>
-                <td>VW</td>
-                <td>2019</td>
-              </tr>
-              <tr>
-                <td>MEV-1234</td>
-                <td>FOX</td>
-                <td>VW</td>
-                <td>2019</td>
-              </tr>
+              {veiculos.map((veiculo) => {
+                return (
+                  <tr>
+                    <td>{veiculo.placa}</td>
+                    <td>{veiculo.modelo}</td>
+                    <td>{veiculo.marca}</td>
+                    <td>{veiculo.ano}</td>
+                    <td>
+                      <button  onClick={() => {excluirVeiculo(veiculo)}}>
+                        X
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </Table>
-
-
       </Cadastro>
     </Container>
-
   );
 }
-
 
 export default App;
