@@ -74,7 +74,7 @@ function App() {
             <thead>
               <tr>
                 <th>Placa</th>
-                <th>Modelooo</th>
+                <th>Modelo</th>
                 <th>Marca</th>
                 <th>Ano</th>
               </tr>
