@@ -30,7 +30,7 @@ export const Table = styled.div`
   border-spacing: 0 0.5rem;
 
   th {
-    color: #202024;
+   
     font-weight: 600;
     padding: 1rem 2rem;
     text-align: left;
