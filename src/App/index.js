@@ -73,7 +73,7 @@ function App() {
           <table>
             <thead>
               <tr>
-                <th>Placaaaa</th>
+                <th>Placa</th>
                 <th>Modelo</th>
                 <th>Marca</th>
                 <th>Ano</th>
