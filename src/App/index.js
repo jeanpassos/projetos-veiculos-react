@@ -11,9 +11,9 @@ function App() {
   const [ano, setAno] = useState("");
 
   function cadastrarVeiculo() {
-    const veiculo = {placa,modelo,marca,ano};
-    if(isVeiculoExistente(veiculo.placa)){
-      alert('Placa já cadastrada')  
+    const veiculo = { placa, modelo, marca, ano };
+    if (isVeiculoExistente(veiculo.placa)) {
+      alert('Placa já cadastrada')
     } else {
       veiculos.push(veiculo);
       const newVeiculos = [...veiculos] //criar novo array com os mesmos valores
@@ -38,7 +38,7 @@ function App() {
   function isVeiculoExistente(placa) {
     let retorno = false;
     veiculos.forEach(veiculo => {
-      if(veiculo.placa === placa) {
+      if (veiculo.placa === placa) {
         retorno = true;
       }
     })
@@ -88,7 +88,7 @@ function App() {
                     <td>{veiculo.marca}</td>
                     <td>{veiculo.ano}</td>
                     <td>
-                      <button  onClick={() => {excluirVeiculo(veiculo)}}>
+                      <button onClick={() => { excluirVeiculo(veiculo) }}>
                         X
                       </button>
                     </td>
